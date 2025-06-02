@@ -5,5 +5,6 @@ data class AgentMessage(
   val content: String,
   val stage: String? = null,    // 如 "thought", "answer"
   val event: String? = null,    // "start", "stream", "end"
-  val append: Boolean = false   // 是否打字机拼接
+  val append: Boolean = false,   // 是否打字机拼接
+  val role: String? = null // user, bot
 )

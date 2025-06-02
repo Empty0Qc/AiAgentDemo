@@ -1,12 +1,9 @@
 package com.example.aiagentdemo.adapter
 
 
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.aiagentdemo.R
 import com.example.aiagentdemo.model.AgentMessage
 import com.example.aiagentdemo.renderer.MessageRenderer
 
@@ -23,7 +20,10 @@ class MessageAdapter(
       "card" -> 1
       "stage" -> 2
       "done" -> 3
-      else -> 4
+      "table" -> 4
+      "flowchart" -> 5
+      "custom_card" -> 6
+      else -> -1
     }
   }
 
@@ -33,6 +33,9 @@ class MessageAdapter(
       1 -> renderer.renderCard("{}")
       2 -> renderer.renderStage("")
       3 -> renderer.renderStage("✅ 回复结束")
+      4 -> renderer.renderTable("""{"header":[],"rows":[]}""")
+      5 -> renderer.renderFlowchart("")
+      6 -> renderer.renderCustomCard("{}")
       else -> renderer.renderDefault("未知类型")
     }
     return MessageViewHolder(view)
@@ -45,6 +48,9 @@ class MessageAdapter(
       "card" -> renderer.renderCard(msg.content)
       "stage" -> renderer.renderStage(msg.content)
       "done" -> renderer.renderStage(msg.content)
+      "table" -> renderer.renderTable(msg.content)
+      "flowchart" -> renderer.renderFlowchart(msg.content)
+      "custom_card" -> renderer.renderCustomCard(msg.content)
       else -> renderer.renderDefault(msg.content)
     }
     (holder.itemView as? ViewGroup)?.removeAllViews()
