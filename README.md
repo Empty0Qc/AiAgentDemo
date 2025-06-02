@@ -30,8 +30,6 @@
 
 ---
 
-#### 🇺🇸 English Version (README English)
-
 ```markdown
 # AI Agent Demo
 
