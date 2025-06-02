@@ -23,7 +23,7 @@
 
 1. 克隆项目：
     ```bash
-    git clone https://github.com/你的用户名/AiAgentDemo.git
+    git clone https://github.com/Empty0Qc/AiAgentDemo
     ```
 
 2. 使用 Android Studio 打开并构建运行即可。
