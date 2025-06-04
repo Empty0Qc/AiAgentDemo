@@ -1,18 +1,26 @@
 package com.example.aiagentdemo.ui.theme
 
-import android.widget.ImageButton
+import com.google.android.material.appbar.MaterialToolbar
 import androidx.appcompat.app.AppCompatActivity
 import com.example.aiagentdemo.R
 
 class TitleBarController(private val activity: AppCompatActivity) {
-  private val btnNewChat = activity.findViewById<ImageButton>(R.id.btn_new_chat)
-  private val btnSidebar = activity.findViewById<ImageButton>(R.id.btn_sidebar)
+  private val toolbar = activity.findViewById<MaterialToolbar>(R.id.titleBar)
   private var onNewChat: (() -> Unit)? = null
   private var onSidebar: (() -> Unit)? = null
 
   init {
-    btnNewChat.setOnClickListener { onNewChat?.invoke() }
-    btnSidebar.setOnClickListener { onSidebar?.invoke() }
+    toolbar.setOnMenuItemClickListener { item ->
+      when (item.itemId) {
+        R.id.action_new_chat -> {
+          onNewChat?.invoke(); true
+        }
+        R.id.action_sidebar -> {
+          onSidebar?.invoke(); true
+        }
+        else -> false
+      }
+    }
   }
 
   fun setOnNewChat(cb: () -> Unit) {

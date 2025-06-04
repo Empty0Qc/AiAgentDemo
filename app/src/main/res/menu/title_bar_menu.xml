@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_new_chat"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="新会话"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_sidebar"
+        android:icon="@android:drawable/ic_menu_sort_by_size"
+        android:title="侧边栏"
+        app:showAsAction="always" />
+</menu>
