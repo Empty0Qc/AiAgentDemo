@@ -62,3 +62,18 @@ An Android demo project simulating an AI assistant chat application, built in Ko
     ```
 
 2. Open with Android Studio and run the project.
+
+## 🚀 Local SSE Server
+
+A small Node server is provided under `server` to stream fixed chat messages.
+
+Run it with:
+```bash
+cd server
+npm install
+npm start
+```
+
+Then access `http://localhost:3000/sse` to see the raw stream. When running on
+an Android emulator, the app will connect to `http://10.0.2.2:3000/sse` after
+you press the send button and stream the mock messages automatically.

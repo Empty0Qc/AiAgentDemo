@@ -3,6 +3,12 @@ package com.example.aiagentdemo
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.sse.EventSource
+import okhttp3.sse.EventSourceListener
+import okhttp3.sse.EventSources
+import org.json.JSONObject
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +31,8 @@ class MainActivity : AppCompatActivity() {
   private lateinit var drawer: DrawerController
   private lateinit var sessionManager: SessionManager
   private lateinit var messageAdapter: MessageAdapter
+  private val httpClient = OkHttpClient()
+  private var eventSource: EventSource? = null
 
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +47,7 @@ class MainActivity : AppCompatActivity() {
       sessionManager.appendMessage(message)
       messageAdapter.notifyItemInserted(sessionManager.messages.size - 1)
       // ai作答
-      simulateStreaming()
+      startSseStream()
     }
     sessionManager = SessionManager(this)
     drawer = DrawerController(this, sessionManager)
@@ -141,6 +149,32 @@ class MainActivity : AppCompatActivity() {
         handleMessage(msg)
       }, index * 1500L)
     }
+  }
+
+  private fun startSseStream() {
+    eventSource?.cancel()
+    val request = Request.Builder()
+      .url("http://10.0.2.2:3000/sse")
+      .build()
+    eventSource = EventSources.createFactory(httpClient)
+      .newEventSource(request, object : EventSourceListener() {
+        override fun onEvent(source: EventSource, id: String?, type: String?, data: String) {
+          if (type == "end" || data == "[DONE]") {
+            source.cancel()
+            return
+          }
+          val obj = JSONObject(data)
+          val msg = AgentMessage(
+            obj.optString("type"),
+            obj.optString("content"),
+            obj.optString("stage"),
+            obj.optString("event"),
+            obj.optBoolean("append"),
+            obj.optString("role")
+          )
+          runOnUiThread { handleMessage(msg) }
+        }
+      })
   }
 
   private fun handleMessage(msg: AgentMessage) {
