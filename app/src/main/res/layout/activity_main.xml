@@ -14,15 +14,46 @@
     android:background="#F7F8FA">
 
     <!-- TitleBar 顶部栏 -->
-    <com.google.android.material.appbar.MaterialToolbar
+    <LinearLayout
       android:id="@+id/titleBar"
       android:layout_width="match_parent"
-      android:layout_height="?attr/actionBarSize"
+      android:layout_height="56dp"
       android:background="?attr/colorPrimary"
+      android:orientation="horizontal"
+      android:gravity="center_vertical"
       android:elevation="4dp"
-      app:title="AI助手"
-      app:titleTextColor="@android:color/white"
-      app:menu="@menu/title_bar_menu" />
+      android:paddingStart="16dp"
+      android:paddingEnd="16dp">
+
+      <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="AI助手"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+      <ImageButton
+        android:id="@+id/btn_new_chat"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@android:drawable/ic_menu_add"
+        android:contentDescription="新会话"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:tint="@android:color/white"/>
+
+      <ImageButton
+        android:id="@+id/btn_sidebar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@android:drawable/ic_menu_sort_by_size"
+        android:contentDescription="侧边栏"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:tint="@android:color/white"
+        android:layout_marginStart="4dp"/>
+    </LinearLayout>
 
     <!-- statusBanner -->
     <TextView
@@ -61,16 +92,18 @@
       android:paddingEnd="12dp"
       android:layout_gravity="bottom">
 
-      <com.google.android.material.button.MaterialButton
+      <Button
         android:id="@+id/btn_deep_search"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="36dp"
         android:text="深度搜索"
         android:background="@drawable/bg_btn_search_default"
         android:textColor="@color/search_btn_normal"
         android:layout_marginEnd="10dp"/>
-      <com.google.android.material.button.MaterialButton
+      <Button
         android:id="@+id/btn_web_search"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="36dp"
         android:text="联网搜索"
@@ -89,22 +122,17 @@
       android:elevation="8dp"
       android:clipToPadding="false">
 
-      <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputLayout"
+      <EditText
+        android:id="@+id/inputField"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="44dp"
+        android:hint="输入你的问题"
+        android:background="@drawable/ic_card_bg"
+        android:paddingEnd="60dp"
+        android:paddingStart="12dp"
+        android:gravity="center_vertical"
         android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/sendPauseButton"
-        app:boxBackgroundMode="outlined">
-
-        <com.google.android.material.textfield.TextInputEditText
-          android:id="@+id/inputField"
-          android:layout_width="match_parent"
-          android:layout_height="44dp"
-          android:hint="输入你的问题"
-          android:paddingStart="12dp"
-          android:gravity="center_vertical" />
-      </com.google.android.material.textfield.TextInputLayout>
+        android:layout_toStartOf="@+id/sendPauseButton"/>
 
       <ImageButton
         android:id="@+id/sendPauseButton"
