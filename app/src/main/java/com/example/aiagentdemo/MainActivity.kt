@@ -154,7 +154,7 @@ class MainActivity : AppCompatActivity() {
   private fun startSseStream() {
     eventSource?.cancel()
     val request = Request.Builder()
-      .url("http://localhost:3000/sse")
+      .url("http://10.0.2.2:3000/sse")
       .build()
     eventSource = EventSources.createFactory(httpClient)
       .newEventSource(request, object : EventSourceListener() {

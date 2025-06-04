@@ -63,6 +63,10 @@ An Android demo project simulating an AI assistant chat application, built in Ko
 
 2. Open with Android Studio and run the project.
 
+If you run the app on a real device or any target with API 28+ you may need to
+allow cleartext HTTP traffic. The project sets
+`android:usesCleartextTraffic="true"` in the manifest for this purpose.
+
 ## 🚀 Local SSE Server
 
 A small Node server is provided under `server` to stream fixed chat messages.
