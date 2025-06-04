@@ -1,7 +1,7 @@
 package com.example.aiagentdemo.ui
 
 import android.content.Context
-import com.example.aiagentdemo.adapter.SessionRecord
+import com.example.aiagentdemo.model.SessionRecord
 import com.example.aiagentdemo.model.AgentMessage
 
 class SessionManager(private val context: Context) {
