@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aiagentdemo.R
+import com.example.aiagentdemo.model.SessionRecord
 
 class HistoryAdapter(
   private val onItemClick: (String) -> Unit
@@ -37,5 +38,3 @@ class HistoryAdapter(
   }
 
 }
-
-data class SessionRecord(val id: String, val name: String, val time: String)
