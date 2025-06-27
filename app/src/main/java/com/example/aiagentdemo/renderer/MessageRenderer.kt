@@ -14,11 +14,11 @@ import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.aiagentdemo.R
-import io.noties.markwon.Markwon
+import com.example.aiagentdemo.markdown.EnhancedMarkdown
 import org.json.JSONObject
 
 class MessageRenderer(private val context: Context) {
-  val markwon = Markwon.create(context)
+  private val markwon = EnhancedMarkdown.create(context)
 
   fun renderMarkdown(content: String): View {
     val view = LayoutInflater.from(context).inflate(R.layout.item_markdown, null)
